@@ -42,6 +42,7 @@ An end-to-end data analysis project on a car sale advertisements dataset, built 
 
 - **Price = 0**: 240 listings (about 2.5%) had a price of 0. These are missing prices, not free cars, and would drag every average down, so they were removed in Power Query (`Table.SelectRows(..., each [price] <> 0)`, step "Removed zero prices").
 - **Mileage = 0**: kept. Most of these are 2016 models, so they are most likely genuinely new cars.
+- **Row count**: 9,576 raw listings → 9,223 after removing 113 duplicate rows (Day 1) and 240 zero-price rows (Day 2).
 - **Data model**: a single clean table (`car_ad`), so no relationships are needed at this stage.
 - **DAX measures**: Total Listings, Avg Price and Avg Mileage, checked with card visuals. See [MEASURES.md](MEASURES.md).
 

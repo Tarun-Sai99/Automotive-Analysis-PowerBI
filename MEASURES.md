@@ -18,6 +18,6 @@ All measures live in the `car_ad` table.
 
 | Measure | Value |
 |---|---|
-| Total Listings | ~9K |
+| Total Listings | 9,223 |
 | Avg Price | ~15.7K |
 | Avg Mileage | ~141 (thousand km) |
