@@ -24,7 +24,7 @@ An end-to-end data analysis project on a car sale advertisements dataset, built 
 | Day | Focus | Status |
 |---|---|---|
 | 1 | Import CSV and clean data in Power Query | Done |
-| 2 | Outlier handling, data model, core DAX measures | Planned |
+| 2 | Outlier handling, data model, core DAX measures | Done |
 | 3 | Overview dashboard: KPIs, price distribution, listings by body type and brand | Planned |
 | 4 | Trend analysis: price vs year, mileage vs price, engine type breakdown | Planned |
 | 5 | Brand and segment deep dive with slicers | Planned |
@@ -36,11 +36,19 @@ An end-to-end data analysis project on a car sale advertisements dataset, built 
 - Imported `car_ad.csv` with **Get Data > Text/CSV > Transform Data**, so cleaning happens in Power Query before loading.
 - **Engine volume (`engV`)**: the column was text with `"NA"` strings mixed in. Replaced `"NA"` with null and changed the type to Decimal Number, so missing values are handled correctly in calculations.
 - **Duplicates**: removed true full-row duplicates with `Table.Distinct` across all columns (deduplicating on a single column would wrongly drop distinct cars that share a value).
-- **Noted for Day 2**: listings with `price = 0` or `mileage = 0` look like data-entry errors and will be handled as outliers.
+- **Noted for Day 2**: listings with `price = 0` or `mileage = 0` looked suspicious and were investigated on Day 2.
+
+## Day 2: Outlier handling and core DAX measures
+
+- **Price = 0**: 240 listings (about 2.5%) had a price of 0. These are missing prices, not free cars, and would drag every average down, so they were removed in Power Query (`Table.SelectRows(..., each [price] <> 0)`, step "Removed zero prices").
+- **Mileage = 0**: kept. Most of these are 2016 models, so they are most likely genuinely new cars.
+- **Data model**: a single clean table (`car_ad`), so no relationships are needed at this stage.
+- **DAX measures**: Total Listings, Avg Price and Avg Mileage, checked with card visuals. See [MEASURES.md](MEASURES.md).
 
 ## Files
 
 - `Automotive_Analysis.pbix`: the Power BI report (open with Power BI Desktop)
+- `MEASURES.md`: DAX measure definitions and notes
 
 ## Tools
 
